@@ -85,3 +85,21 @@ button:hover{
 .card button:hover{
   background: #1d4ed8;
 }
+.results{
+  text-align: center;
+  margin: 20px;
+  color:#1d3557;
+}
+.no-results{
+  margin-top: 40px;
+  text-align: center;
+  padding: 30px;
+  border-radius: 12px;
+  background: #f8f9fa;
+}
+.no-results h2{
+  color: #e63946;
+}
+.no-results p{
+  color: #555;
+}

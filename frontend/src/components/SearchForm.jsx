@@ -1,5 +1,5 @@
 import {useState } from "react";
-function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear}){
+function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubject}){
     const [topic,setTopic]=useState("");
     const [branch,setBranch]=useState("");
     const [year,setYear]=useState("");
@@ -9,6 +9,7 @@ function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear}){
         setSearchTopic(topic);
         setSearchBranch(branch);
         setSearchYear(year);
+        setSearchSubject(subject);
     }
     return(
         <div className="search-box">
