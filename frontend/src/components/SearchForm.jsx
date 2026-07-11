@@ -1,15 +1,23 @@
 import {useState } from "react";
-function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubject}){
+import subjectsByBranch from"../data/subjects";
+function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubject,setSearchLearningGoal}){
     const [topic,setTopic]=useState("");
     const [branch,setBranch]=useState("");
     const [year,setYear]=useState("");
     const [semester,setSemester]=useState("");
     const [subject,setSubject]=useState("");
+    const [learningGoal,setLearningGoal]=useState("");
+    const availableSubjects=subjectsByBranch[branch]||[];
+   console.log("subjectsByBranch =", subjectsByBranch);
+console.log("branch =", branch);
+console.log("subjectsByBranch[branch] =", subjectsByBranch[branch]);
+console.log("availableSubjects =", availableSubjects);
     const searchLecture= () =>{
         setSearchTopic(topic);
         setSearchBranch(branch);
         setSearchYear(year);
         setSearchSubject(subject);
+        setSearchLearningGoal(learningGoal);
     }
     return(
         <div className="search-box">
@@ -36,14 +44,29 @@ function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubj
                 <option value="Fourth Year">Fourth Year </option>
                 
             </select>
-            <select value={subject}
-            onChange={(e) => setSubject(e.target.value)}>
-                <option value="">Select Subject</option>
-                <option>Data Structures</option>
-                <option>Operating System</option>
-                <option>DBMS</option>
-                <option>Computer Network</option>
-                <option>Machine Learning </option>
+      <select
+    value={subject}
+    onChange={(e) => setSubject(e.target.value)}
+>
+    <option value="">Select Subjects</option>
+
+    {availableSubjects.map((sub) => {
+        console.log("Rendering:", sub);
+        return (
+            <option key={sub} value={sub}>
+                {sub}
+            </option>
+        );
+    })}
+</select>
+     
+    
+           
+            <select value={learningGoal}
+            onChange={(e)=>setLearningGoal(e.target.value)}>
+                <option value="">Learning Goal</option>
+                <option value="Detailed">Detailed</option>
+                <option value="Revision">Revision</option>
             </select>
             <button onClick={searchLecture}>
                 Search Lecture

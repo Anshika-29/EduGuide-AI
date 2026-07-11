@@ -36,15 +36,24 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
+  align-items: center;
+  gap: 18px;
+  margin:35px auto;
+  padding: 20px;
 }
-input,select{
+input,
+select{
   padding: 12px;
   font-size: 16px;
   width: 220px;
   border-radius: 6px;
   border: 1px solid gray;
+}
+input:focus,
+select:focus{
+  outline:none;
+  border-color:#2563eb;
+  box-shadow: 0 0 8px rgba(37,99,235,0.3);
 }
 button{
   padding: 12px 20px;
@@ -59,16 +68,17 @@ button:hover{
   background: #1d4ed8;
 }
 .card{
-  width:350px;
+  width:360px;
   margin:20px auto;
-  padding:20px;
-  border-radius: 10px;
+  padding:22px;
+  border-radius: 16px;
   background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition:all 0.3s ease;
 }
 .card:hover{
-  transform: translateY(-8px);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(37,99,235,0.2);
 }
 .card h2{
   color: #2563eb;
@@ -84,6 +94,11 @@ button:hover{
 }
 .card button:hover{
   background: #1d4ed8;
+}
+.lecture-title{
+  color:#2563eb;
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 .results{
   text-align: center;
@@ -103,3 +118,44 @@ button:hover{
 .no-results p{
   color: #555;
 }
+.watch-btn{
+  display: inline-block;
+  margin-top: 18px;
+  background: #ff0000;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+.watch-btn:hover{
+  background: #cc0000;
+  transform: scale(1.05);
+}
+lecture-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:25px;
+  padding: 30px;
+}
+@media(max-width:768px){
+  .navbar{
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  .search-box{
+    flex-direction: column;
+  }
+  input,
+  select,
+  button{
+    width: 90%;
+  }
+  .card{
+    width: 90%;
+  }
+}
+

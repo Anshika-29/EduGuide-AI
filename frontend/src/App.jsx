@@ -10,6 +10,7 @@ function App(){
   const[searchBranch,setSearchBranch]=useState("");
   const[searchYear,setSearchYear]=useState("");
   const[searchSubject,setSearchSubject]=useState("");
+  const[searchLearningGoal,setSearchLearningGoal]=useState("");
   const filteredLectures=lectures.filter((lecture) =>
   {
     const topicMatch=
@@ -25,7 +26,10 @@ function App(){
       const subjectMatch=
       searchSubject ===""||
       lecture.subject === searchSubject;
-      return topicMatch && branchMatch&&yearMatch&&subjectMatch;
+      const learningGoalMatch=
+      searchLearningGoal ===""||
+      lecture.learningGoal === searchLearningGoal;
+      return topicMatch && branchMatch&&yearMatch&&subjectMatch&&learningGoalMatch;
   }
   );
   return(
@@ -36,6 +40,7 @@ function App(){
       setSearchBranch={setSearchBranch}
       setSearchYear={setSearchYear}
       setSearchSubject={setSearchSubject}
+      setSearchLearningGoal={setSearchLearningGoal}
       />
       <div className="results">
         <h3>
@@ -45,19 +50,26 @@ function App(){
       </div>
       {
         filteredLectures.length> 0 ?(
-      filteredLectures.map((lecture,index) => 
+          <div className="lecture-container">
+      {filteredLectures.map((lecture,index) => 
       (<LectureCard
         key={lecture.id}
         title={lecture.topic}
         subject={lecture.subject}
         branch={lecture.branch}
         year={lecture.year}
+        instructor={lecture.instructor}
+        duration={lecture.duration}
+        language={lecture.language}
+        difficulty={lecture.difficulty}
+        learningGoal={lecture.learningGoal}
         channel={lecture.channel}
         rating={lecture.rating}
         views={lecture.views}
         link={lecture.link}
         />
-      ))
+      ))}
+            </div>
       ):(
         <div className="no-results">
           <h2>😔 No lectures found</h2>
