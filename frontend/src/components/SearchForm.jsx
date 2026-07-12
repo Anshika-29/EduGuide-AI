@@ -1,12 +1,14 @@
 import {useState } from "react";
 import subjectsByBranch from"../data/subjects";
-function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubject,setSearchLearningGoal}){
+function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubject,setSearchLearningGoal,setSearchDifficulty,setSearchLanguage}){
     const [topic,setTopic]=useState("");
     const [branch,setBranch]=useState("");
     const [year,setYear]=useState("");
     const [semester,setSemester]=useState("");
     const [subject,setSubject]=useState("");
     const [learningGoal,setLearningGoal]=useState("");
+    const [difficulty,setDifficulty]=useState("");
+    const[language,setLanguage]=useState("");
     const availableSubjects=subjectsByBranch[branch]||[];
    console.log("subjectsByBranch =", subjectsByBranch);
 console.log("branch =", branch);
@@ -18,6 +20,24 @@ console.log("availableSubjects =", availableSubjects);
         setSearchYear(year);
         setSearchSubject(subject);
         setSearchLearningGoal(learningGoal);
+        setSearchDifficulty(difficulty);
+        setSearchLanguage(language);
+    }
+    const clearFilters =() =>{
+        setTopic("");
+        setBranch("");
+        setYear("");
+        setSubject("");
+        setLearningGoal("");
+        setDifficulty("");
+        setLanguage("")
+        setSearchTopic("");
+        setSearchBranch("");
+        setSearchYear("");
+        setSearchSubject("");
+        setSearchLearningGoal("");
+        setSearchDifficulty("");
+        setSearchLanguage("");
     }
     return(
         <div className="search-box">
@@ -68,9 +88,27 @@ console.log("availableSubjects =", availableSubjects);
                 <option value="Detailed">Detailed</option>
                 <option value="Revision">Revision</option>
             </select>
+            <select value={difficulty}
+            onChange={(e)=>setDifficulty(e.target.value)}>
+                <option value="">Difficulty</option>
+                <option value="Basic">Basic</option>
+                <option   value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <select value={language}
+            onChange={(e)=> setLanguage(e.target.value)}>
+                <option value="">Language</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+            </select>
+            <div className="button-group">
             <button onClick={searchLecture}>
                 Search Lecture
             </button>
+            <button className="clear-btn" onClick={clearFilters}>
+                Clear Filters
+            </button>
+            </div>
         </div>
     );
 }
