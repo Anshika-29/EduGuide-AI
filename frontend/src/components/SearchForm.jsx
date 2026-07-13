@@ -10,10 +10,6 @@ function SearchForm({ setSearchTopic,setSearchBranch,setSearchYear,setSearchSubj
     const [difficulty,setDifficulty]=useState("");
     const[language,setLanguage]=useState("");
     const availableSubjects=subjectsByBranch[branch]||[];
-   console.log("subjectsByBranch =", subjectsByBranch);
-console.log("branch =", branch);
-console.log("subjectsByBranch[branch] =", subjectsByBranch[branch]);
-console.log("availableSubjects =", availableSubjects);
     const searchLecture= () =>{
         setSearchTopic(topic);
         setSearchBranch(branch);

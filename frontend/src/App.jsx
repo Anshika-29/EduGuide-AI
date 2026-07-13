@@ -128,7 +128,12 @@ function App(){
       ):(
         <div className="no-results">
           <h2>😔 No lectures found</h2>
-          <p>Try changing your filters or search another topic.</p>
+          <p>We couldn't find any lecture matching your current search.</p>
+          <ul>
+            <li>🔍 Try searching another topic</li>
+            <li>🎯Remove one or more filters</li>
+            <li>🔄Click "Clear Filters" to reset everything</li>
+          </ul>
     </div>
   )
 }
