@@ -3,6 +3,7 @@ import {useState} from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import SearchForm from "./components/SearchForm";
+import LectureModal from"./components/LectureModal";
 import LectureCard from"./components/LectureCard";
 import lectures from "./data/lectures";
 function App(){
@@ -13,6 +14,22 @@ function App(){
   const[searchLearningGoal,setSearchLearningGoal]=useState("");
   const[searchDifficulty,setSearchDifficulty]=useState("");
   const[searchLanguage,setSearchLanguage]=useState("");
+  const[selectedLecture,setSelectedLecture]=useState(null);
+  const[favoriteLectures,setFavoriteLectures]=useState([]);
+  function addToFavorites(lecture){
+    const alreadyFavorite=favoriteLectures.some((favLecture=>favLecture.id===lecture.id));
+    if(alreadyFavorite){
+      return;
+    }
+    setFavoriteLectures([
+      ...favoriteLectures,
+      lecture
+    ]);
+  }
+  function removeFromFavorites(id){
+    const updatedFavorites=favoriteLectures.filter((lecture)=>lecture.id!==id);
+    setFavoriteLectures(updatedFavorites);
+  }
   const filteredLectures=lectures.filter((lecture) =>
   {
     const topicMatch=
@@ -108,22 +125,25 @@ function App(){
           <div className="lecture-container">
       {filteredLectures.map((lecture,index) => 
       (<LectureCard
-        key={lecture.id}
-        title={lecture.topic}
-        subject={lecture.subject}
-        branch={lecture.branch}
-        year={lecture.year}
-        instructor={lecture.instructor}
-        duration={lecture.duration}
-        language={lecture.language}
-        difficulty={lecture.difficulty}
-        learningGoal={lecture.learningGoal}
-        channel={lecture.channel}
-        rating={lecture.rating}
-        views={lecture.views}
-        link={lecture.link}
+      key={lecture.id}
+       lecture={lecture}
+        setSelectedLecture={setSelectedLecture}
+        addToFavorites={addToFavorites}
         />
       ))}
+      <h2>Favorite Lecture ({favoriteLectures.length})</h2>{
+        favoriteLectures.map((lecture)=>(
+         <LectureCard
+         key={lecture.id}
+         lecture={lecture}
+         setSelectedLecture={setSelectedLecture}
+         isFavorite={true}
+         removeFromFavorites={removeFromFavorites}
+         />
+        ))
+      }
+      {selectedLecture &&(<LectureModal lecture={selectedLecture}
+      setSelectedLecture={setSelectedLecture}/>)}
             </div>
       ):(
         <div className="no-results">
