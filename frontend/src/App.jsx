@@ -1,5 +1,5 @@
-import "./App.css";
-import {useState} from "react";
+import"./App.css";
+import {useState,useEffect} from"react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import SearchForm from "./components/SearchForm";
@@ -16,6 +16,20 @@ function App(){
   const[searchLanguage,setSearchLanguage]=useState("");
   const[selectedLecture,setSelectedLecture]=useState(null);
   const[favoriteLectures,setFavoriteLectures]=useState([]);
+  useEffect(()=>{
+    const savedFavorites=localStorage.getItem("favoriteLectures");
+    if(savedFavorites){
+      const parsedFavorites=JSON.parse(savedFavorites);
+      setFavoriteLectures(parsedFavorites);
+    }
+  },[]);
+  useEffect(()=>{
+    if(favoriteLectures.length===0) return;
+    localStorage.setItem(
+      "favoriteLectures",
+      JSON.stringify(favoriteLectures)
+    );
+  },[favoriteLectures]);
   function addToFavorites(lecture){
     const alreadyFavorite=favoriteLectures.some((favLecture=>favLecture.id===lecture.id));
     if(alreadyFavorite){
@@ -29,6 +43,15 @@ function App(){
   function removeFromFavorites(id){
     const updatedFavorites=favoriteLectures.filter((lecture)=>lecture.id!==id);
     setFavoriteLectures(updatedFavorites);
+  }
+  function clearFilters(){
+    setSearchTopic("");
+    setSearchBranch("");
+    setSearchYear("");
+    setSearchSubject("");
+    setSearchLearningGoal("");
+    setSearchDifficulty("");
+    setSearchLanguage("");
   }
   const filteredLectures=lectures.filter((lecture) =>
   {
@@ -108,6 +131,17 @@ function App(){
         </div>
       </div>
       <div className="active-filters">
+        {
+          !searchTopic &&
+          !searchBranch &&
+          !searchYear &&
+          !searchSubject &&
+          !searchLearningGoal&&
+          !searchDifficulty &&
+          !searchLanguage&&(<p className="no-filter">
+            No filters applied .Showing all lectures.
+          </p>)
+        }
       {searchTopic &&(
           <p><strong>Topic:</strong> {searchTopic}</p>)}
           {searchBranch&&(<p><strong>Branch:</strong> {searchBranch}</p>)}
@@ -118,6 +152,7 @@ function App(){
           {searchDifficulty &&(<p><strong>Difficulty:</strong> {searchDifficulty}</p>)}
           {searchLearningGoal&&(<p><strong>Learning Goal:</strong> {searchLearningGoal}</p>)}
           {searchLanguage &&(<p><strong>Language:</strong> {searchLanguage}</p>)}
+          
           </div>
       
       {
@@ -131,7 +166,17 @@ function App(){
         addToFavorites={addToFavorites}
         />
       ))}
-      <h2>Favorite Lecture ({favoriteLectures.length})</h2>{
+      {
+        favoriteLectures.length===0?(
+          <div className="empty-favorites">
+            <h2> No Favorite Lectures Yet</h2>
+            <p>Start adding lectures to build your personal learning list.</p>
+            </div>
+        ):(
+          <><h2 className="favorite-heading">
+            Favorite Lectures({favoriteLectures.length})
+          </h2>
+      {
         favoriteLectures.map((lecture)=>(
          <LectureCard
          key={lecture.id}
@@ -141,6 +186,9 @@ function App(){
          removeFromFavorites={removeFromFavorites}
          />
         ))
+      }
+      </>
+        )
       }
       {selectedLecture &&(<LectureModal lecture={selectedLecture}
       setSelectedLecture={setSelectedLecture}/>)}
