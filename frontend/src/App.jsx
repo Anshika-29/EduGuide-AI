@@ -1,5 +1,5 @@
 import"./App.css";
-import {useState,useEffect} from"react";
+import {useState,useEffect,useRef} from"react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import SearchForm from "./components/SearchForm";
@@ -16,6 +16,17 @@ function App(){
   const[searchLanguage,setSearchLanguage]=useState("");
   const[selectedLecture,setSelectedLecture]=useState(null);
   const[favoriteLectures,setFavoriteLectures]=useState([]);
+  const firstFavoriteRender=useRef(true);
+  const firstFilterRender=useRef(true);
+  const filters={
+    topic:searchTopic,
+    branch:searchBranch,
+    year:searchYear,
+    subject:searchSubject,
+    learningGoal:searchLearningGoal,
+    difficulty:searchDifficulty,
+    language:searchLanguage,
+  };
   useEffect(()=>{
     const savedFavorites=localStorage.getItem("favoriteLectures");
     if(savedFavorites){
@@ -24,12 +35,40 @@ function App(){
     }
   },[]);
   useEffect(()=>{
-    if(favoriteLectures.length===0) return;
+    if(firstFavoriteRender.current){
+      firstFavoriteRender.current=false;
+      return;
+    }
     localStorage.setItem(
       "favoriteLectures",
       JSON.stringify(favoriteLectures)
     );
   },[favoriteLectures]);
+  useEffect(()=>{
+      const savedFilters=localStorage.getItem("searchFilters");
+      if(savedFilters){
+        const parsedFilters=JSON.parse(savedFilters);
+        setSearchTopic(parsedFilters.topic);
+        setSearchBranch(parsedFilters.branch);
+        setSearchYear(parsedFilters.year);
+        setSearchSubject(parsedFilters.subject);
+        setSearchLearningGoal(parsedFilters.learningGoal);
+        setSearchDifficulty(parsedFilters.difficulty);
+        setSearchLanguage(parsedFilters.language);
+      }
+    },[]);
+  
+  useEffect(()=>{
+    if(firstFilterRender.current){
+      firstFilterRender.current=false;
+      return;
+    }
+    localStorage.setItem(
+      "searchFilters",
+      JSON.stringify(filters)
+    );
+    },[filters]);
+    
   function addToFavorites(lecture){
     const alreadyFavorite=favoriteLectures.some((favLecture=>favLecture.id===lecture.id));
     if(alreadyFavorite){
@@ -102,12 +141,20 @@ function App(){
     <div>
       <Navbar />
       <Hero />
-      <SearchForm setSearchTopic={setSearchTopic}
+      <SearchForm 
+      searchTopic={searchTopic}
+      setSearchTopic={setSearchTopic}
+      searchBranch={searchBranch}
       setSearchBranch={setSearchBranch}
+      searchYear={searchYear}
       setSearchYear={setSearchYear}
+      searchSubject={searchSubject}
       setSearchSubject={setSearchSubject}
+      searchLearningGoal={searchLearningGoal}
       setSearchLearningGoal={setSearchLearningGoal}
+      searchDifficulty={searchDifficulty}
       setSearchDifficulty={setSearchDifficulty}
+      searchLanguage={searchLanguage}
       setSearchLanguage={setSearchLanguage}
       />
       <div className="results">
@@ -128,6 +175,10 @@ function App(){
         <div className="stat-card">
           <h3>Total Views</h3>
           <p>{formattedViews}</p>
+        </div>
+        <div className="stat-card">
+          <h3>Favorite Lectures</h3>
+          <p>{favoriteLectures.length}</p>
         </div>
       </div>
       <div className="active-filters">
