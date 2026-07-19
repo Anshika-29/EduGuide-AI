@@ -1,6 +1,6 @@
 import lectures from "../data/lectures";
 
-function LectureCard({lecture,setSelectedLecture,addToFavorites,removeFromFavorites,isFavorite=false}){
+function LectureCard({lecture,setSelectedLecture,setSelectedNotesLecture,addToFavorites,removeFromFavorites,isFavorite=false}){
     return(
         <div className="card">
             <h2 className="lecture-title">📚{lecture.topic}</h2>
@@ -26,7 +26,10 @@ function LectureCard({lecture,setSelectedLecture,addToFavorites,removeFromFavori
         {isFavorite?(
             <button onClick={()=>removeFromFavorites(lecture.id)}>Remove from Favorites</button>
         ):(
+            <>
         <button onClick={()=>addToFavorites(lecture)}>❤️ Add to Favorites</button>
+        <button onClick={()=> setSelectedNotesLecture(lecture)}>Notes</button>
+        </>
         )
     }
         </div>

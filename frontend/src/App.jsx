@@ -1,3 +1,4 @@
+import NotesModal from "./components/NotesModal";
 import"./App.css";
 import {useState,useEffect,useRef} from"react";
 import Navbar from "./components/Navbar";
@@ -15,6 +16,7 @@ function App(){
   const[searchDifficulty,setSearchDifficulty]=useState("");
   const[searchLanguage,setSearchLanguage]=useState("");
   const[selectedLecture,setSelectedLecture]=useState(null);
+  const[selectedNotesLecture,setSelectedNotesLecture]=useState(null);
   const[favoriteLectures,setFavoriteLectures]=useState([]);
   const firstFavoriteRender=useRef(true);
   const firstFilterRender=useRef(true);
@@ -214,6 +216,7 @@ function App(){
       key={lecture.id}
        lecture={lecture}
         setSelectedLecture={setSelectedLecture}
+        setSelectedNotesLecture={setSelectedNotesLecture}
         addToFavorites={addToFavorites}
         />
       ))}
@@ -233,6 +236,7 @@ function App(){
          key={lecture.id}
          lecture={lecture}
          setSelectedLecture={setSelectedLecture}
+         setSelectedNotesLecture={setSelectedNotesLecture}
          isFavorite={true}
          removeFromFavorites={removeFromFavorites}
          />
@@ -243,6 +247,10 @@ function App(){
       }
       {selectedLecture &&(<LectureModal lecture={selectedLecture}
       setSelectedLecture={setSelectedLecture}/>)}
+      {selectedNotesLecture &&(
+        <NotesModal lecture={selectedNotesLecture}
+        setSelectedLecture={setSelectedNotesLecture}/>
+      )}
             </div>
       ):(
         <div className="no-results">
