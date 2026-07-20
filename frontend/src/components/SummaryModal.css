@@ -1,4 +1,4 @@
-.modal-overlay{
+.summary-overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,7 @@
     align-items: center;
     z-index:1000;
 }
-.notes-modal{
+.summary-modal{
     background: white;
     width: 60%;
     max-width: 700px;
@@ -20,26 +20,26 @@
     overflow-y: auto;
     padding: 25px;
 }
-.notes-modal h2{
+.summary-modal h2{
     text-align: center;
     margin-bottom: 15px;
 
 }
-.notes-modal h3{
+.summary-modal h3{
     color: #1e88e5;
     margin-bottom: 15px;
 }
-.notes-content{
+.summary-content{
     margin-top: 20px;
     text-align: left;
 }
-.notes-content pre{
+.summary-content pre{
     white-space:pre-wrap;
     font-family: Arial,sans-serif;
     line-height: 1.8;
     font-size: 16px;
 }
-.notes-modal button{
+.summary-modal button{
     margin-top: 20px;
     padding: 10px 20px;
     border: none;
@@ -48,6 +48,6 @@
     border-radius: 6px;
     cursor: pointer;
 }
-.notes-modal button:hover{
+.summary-modal button:hover{
     background: #1565c0;
 }

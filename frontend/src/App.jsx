@@ -1,3 +1,5 @@
+import QuizModal from "./components/QuizModal";
+import SummaryModal from "./components/SummaryModal";
 import NotesModal from "./components/NotesModal";
 import"./App.css";
 import {useState,useEffect,useRef} from"react";
@@ -16,6 +18,8 @@ function App(){
   const[searchDifficulty,setSearchDifficulty]=useState("");
   const[searchLanguage,setSearchLanguage]=useState("");
   const[selectedLecture,setSelectedLecture]=useState(null);
+  const[selectedQuizLecture,setSelectedQuizLecture]=useState(null);
+  const [selectedSummaryLecture,setSelectedSummaryLecture]=useState(null);
   const[selectedNotesLecture,setSelectedNotesLecture]=useState(null);
   const[favoriteLectures,setFavoriteLectures]=useState([]);
   const firstFavoriteRender=useRef(true);
@@ -217,6 +221,8 @@ function App(){
        lecture={lecture}
         setSelectedLecture={setSelectedLecture}
         setSelectedNotesLecture={setSelectedNotesLecture}
+        setSelectedSummaryLecture={setSelectedSummaryLecture}
+        setSelectedQuizLecture={setSelectedQuizLecture}
         addToFavorites={addToFavorites}
         />
       ))}
@@ -237,6 +243,8 @@ function App(){
          lecture={lecture}
          setSelectedLecture={setSelectedLecture}
          setSelectedNotesLecture={setSelectedNotesLecture}
+         setSelectedSummaryLecture={setSelectedSummaryLecture}
+         setSelectedQuizLecture={setSelectedQuizLecture}
          isFavorite={true}
          removeFromFavorites={removeFromFavorites}
          />
@@ -251,6 +259,19 @@ function App(){
         <NotesModal lecture={selectedNotesLecture}
         setSelectedLecture={setSelectedNotesLecture}/>
       )}
+      {
+        selectedSummaryLecture &&(
+          <SummaryModal lecture={selectedSummaryLecture}
+          setSelectedSummaryLecture={setSelectedSummaryLecture}/>
+        )
+      }
+      {
+        selectedQuizLecture && (
+          <QuizModal lecture={selectedQuizLecture}
+          setSelectedQuizLecture={setSelectedQuizLecture}
+          />
+        )
+      }
             </div>
       ):(
         <div className="no-results">
