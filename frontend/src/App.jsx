@@ -8,7 +8,6 @@ import Hero from "./components/Hero";
 import SearchForm from "./components/SearchForm";
 import LectureModal from"./components/LectureModal";
 import LectureCard from"./components/LectureCard";
-import lectures from "./data/lectures";
 function App(){
   const [searchTopic,setSearchTopic]=useState("");
   const[searchBranch,setSearchBranch]=useState("");
@@ -33,6 +32,21 @@ function App(){
     difficulty:searchDifficulty,
     language:searchLanguage,
   };
+  const[lectureData,setLectureData]=useState([]);
+  useEffect(()=>{
+    async function fetchLectures(){
+      try{
+        const response=await fetch("http://localhost:5000/api/lectures");
+        const data=await response.json();
+        console.log(data);
+        setLectureData(data);
+      }
+      catch(error){
+        console.error("Error fetching lectures:",error);
+      }
+    }
+    fetchLectures();
+  },[]);
   useEffect(()=>{
     const savedFavorites=localStorage.getItem("favoriteLectures");
     if(savedFavorites){
@@ -98,7 +112,7 @@ function App(){
     setSearchDifficulty("");
     setSearchLanguage("");
   }
-  const filteredLectures=lectures.filter((lecture) =>
+  const filteredLectures=lectureData.filter((lecture) =>
   {
     const topicMatch=
     lecture.topic
