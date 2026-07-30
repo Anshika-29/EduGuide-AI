@@ -14,7 +14,16 @@ function getLectureById(req,res){
     }
     res.json(lecture);
 }
+function addLecture(req,res){
+    const newLecture=req.body;
+    lectures.push(newLecture);
+    res.status(201).json({
+        message:"Lecture added successfully",
+        lecture:newLecture,
+    });
+}
 module.exports={
     getLectures,
     getLectureById,
+    addLecture,
 };
