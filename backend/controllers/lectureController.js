@@ -1,27 +1,48 @@
-const lectures=require("../data/lectures");
-function getLectures(req,res){
-    res.json(lectures);
-}
-function getLectureById(req,res){
-    const id=parseInt(req.params.id);
-    const lecture=lectures.find(
-        (lecture)=>lecture.id===id
-    );
-    if(!lecture){
-        return res.status(404).json({
-            message:"Lecture not found",
+const Lecture = require("../models/Lecture");
+const lectures=require("../models/lectures");
+const getLectures=async(req,res)=>{
+    try{
+        const lectures=await Lecture.find();
+        res.json(lectures);
+    }
+    catch(error){
+        res.status(500).json({
+            message:"Error fetching lectures",
+            error:error.message,
         });
     }
-    res.json(lecture);
-}
-function addLecture(req,res){
-    const newLecture=req.body;
-    lectures.push(newLecture);
-    res.status(201).json({
-        message:"Lecture added successfully",
-        lecture:newLecture,
-    });
-}
+};
+const getLectureById=async(req,res)=>{
+    try{
+        const lecture=await Lecture.findById(req.params.id);
+        if(!lecture){
+            return res.status(404).json({
+                message:"LEcture not found",
+            });
+        }
+        res.json(lecture);
+    }
+    catch(error){
+        res.status(500).json({
+            message:"Error fetching lecture",
+            error:error.message,
+        });
+    }
+};
+const addLecture =async(req,res)=>{
+    try{
+        const newLecture=await Lecture.create(req.body);
+        res.status(201).json({
+            message:"Lecture added successfully",
+            lecture:newLecture,
+        });
+    }catch(error){
+        res.status(500).json({
+            message:"Error adding lecture",
+            error:error.message,
+        });
+    }
+};
 module.exports={
     getLectures,
     getLectureById,
