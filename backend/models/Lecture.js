@@ -9,18 +9,73 @@ const lectureSchema=new mongoose.Schema({
         required:true,
     },
     year :{
-        type:Number,
+        type:String,
         required:true,
     },
     subject:{
         type:String,
         required:true,
     },
-    faculty:{
+    topic:{
+        type:String,
+        required:true,
+    },
+    learningGoal:{
+        type:String,
+        required:true,
+    },
+    channel:{
+        type:String,
+        required:true,
+    },
+    instructor:{
+        type:String,
+        required:true,
+    },
+    duration:{
+        type:String,
+        required:true,
+    },
+    rating:{
+        type:number,
+        required:true,
+    },
+    views:{
+        type:number,
+        required:true,
+    },
+    language:{
+        type:String,
+        required:true,
+    },
+    difficulty:{
         type:String,
         required:true,
     },
     youTubeLink:{
+        type:String,
+        required:true,
+    },
+    notes:{
+        type:String,
+        required:true,
+    },
+    quiz:[{
+        question:{
+        Type:String,
+        required:true,
+        },
+        options:{
+        type:[String],
+        required:true,
+        },
+        answer:{
+            type:String,
+            required:true,
+        },
+    },
+    ],
+    summary:{
         type:String,
         required:true,
     },
