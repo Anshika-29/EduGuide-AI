@@ -90,7 +90,7 @@ function App(){
     },[filters]);
     
   function addToFavorites(lecture){
-    const alreadyFavorite=favoriteLectures.some((favLecture=>favLecture.id===lecture.id));
+    const alreadyFavorite=favoriteLectures.some((favLecture=>favLecture._id===lecture._id));
     if(alreadyFavorite){
       return;
     }
@@ -100,7 +100,7 @@ function App(){
     ]);
   }
   function removeFromFavorites(id){
-    const updatedFavorites=favoriteLectures.filter((lecture)=>lecture.id!==id);
+    const updatedFavorites=favoriteLectures.filter((lecture)=>lecture._id!==id);
     setFavoriteLectures(updatedFavorites);
   }
   function clearFilters(){
@@ -231,7 +231,7 @@ function App(){
           <div className="lecture-container">
       {filteredLectures.map((lecture,index) => 
       (<LectureCard
-      key={lecture.id}
+      key={lecture._id}
        lecture={lecture}
         setSelectedLecture={setSelectedLecture}
         setSelectedNotesLecture={setSelectedNotesLecture}
@@ -253,7 +253,7 @@ function App(){
       {
         favoriteLectures.map((lecture)=>(
          <LectureCard
-         key={lecture.id}
+         key={lecture._id}
          lecture={lecture}
          setSelectedLecture={setSelectedLecture}
          setSelectedNotesLecture={setSelectedNotesLecture}

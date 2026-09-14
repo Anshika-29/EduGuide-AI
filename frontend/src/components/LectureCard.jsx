@@ -1,5 +1,3 @@
-import lectures from "../data/lectures";
-
 function LectureCard({lecture,setSelectedLecture,setSelectedNotesLecture,setSelectedSummaryLecture,setSelectedQuizLecture,addToFavorites,removeFromFavorites,isFavorite=false}){
     return(
         <div className="card">
@@ -15,7 +13,7 @@ function LectureCard({lecture,setSelectedLecture,setSelectedNotesLecture,setSele
             <p><strong>Channel:</strong> {lecture.channel}</p> 
             <p><strong>Rating:</strong>⭐{lecture.rating}</p>
             <p><strong>Views:</strong>👁️{lecture.views}</p>
-            <a href={lecture.link}
+            <a href={lecture.youTubeLink}
             target="_blank"
             rel="noopener noreferrer"
             className="watch-btn"> ▶ Watch on YouTube</a>
@@ -24,12 +22,12 @@ function LectureCard({lecture,setSelectedLecture,setSelectedNotesLecture,setSele
                 📖 View Details
         </button>
         {isFavorite?(
-            <button onClick={()=>removeFromFavorites(lecture.id)}>Remove from Favorites</button>
+            <button onClick={()=>removeFromFavorites(lecture._id)}>Remove from Favorites</button>
         ):(
             <>
         <button onClick={()=>addToFavorites(lecture)}>❤️ Add to Favorites</button>
         <button onClick={()=> setSelectedNotesLecture(lecture)}>Notes</button>
-        <button onClick={()=> setSelectetdSummaryLecture(lecture)}>Summary</button>
+        <button onClick={()=> setSelectedSummaryLecture(lecture)}>Summary</button>
         <button onClick={()=> setSelectedQuizLecture(lecture)}>Quiz</button>
         </>
         )

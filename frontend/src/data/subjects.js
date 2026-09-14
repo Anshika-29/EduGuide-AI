@@ -1,9 +1,9 @@
 
 const subjectsByBranch={
     CSE:[
-        "Data Structure",
+        "Data Structures",
         "DBMS",
-        "Operating Syatem",
+        "Operating System",
         "Computer Networks",
         "Machine Learning"
     ],
@@ -32,7 +32,7 @@ const subjectsByBranch={
     ],
     Mechanical:[
         "Thermodynamics",
-        "Fluid MEchanics",
+        "Fluid Mechanics",
         "Manufacturing",
         "Machine Design"
     ]

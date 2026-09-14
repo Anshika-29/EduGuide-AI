@@ -29,10 +29,10 @@ function SearchForm({searchTopic, setSearchTopic,searchBranch,setSearchBranch,se
             <select value={searchYear}
             onChange={(e) => setSearchYear(e.target.value)}>
                 <option value="">Select Year</option>
-                <option value="First Year">First Year</option>
-                <option value="Second Year">Second Year</option>
-                <option value="Third Year">Third Year</option>
-                <option value="Fourth Year">Fourth Year </option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year </option>
                 
             </select>
       <select
@@ -55,13 +55,14 @@ function SearchForm({searchTopic, setSearchTopic,searchBranch,setSearchBranch,se
             <select value={searchLearningGoal}
             onChange={(e)=>setSearchLearningGoal(e.target.value)}>
                 <option value="">Learning Goal</option>
-                <option value="Detailed">Detailed</option>
-                <option value="Revision">Revision</option>
+                <option value="Detailed Learning">Detailed Learning</option>
+                <option value="Quick Revision">Quick Revision</option>
+                <option value="Gate Preparation">Gate Preparation</option>
             </select>
             <select value={searchDifficulty}
             onChange={(e)=>setSearchDifficulty(e.target.value)}>
                 <option value="">Difficulty</option>
-                <option value="Basic">Basic</option>
+                <option value="Beginner">Beginner</option>
                 <option   value="Intermediate">Intermediate</option>
                 <option value="Advanced">Advanced</option>
             </select>

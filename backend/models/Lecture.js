@@ -37,11 +37,11 @@ const lectureSchema=new mongoose.Schema({
         required:true,
     },
     rating:{
-        type:number,
+        type:Number,
         required:true,
     },
     views:{
-        type:number,
+        type:String,
         required:true,
     },
     language:{
@@ -62,7 +62,7 @@ const lectureSchema=new mongoose.Schema({
     },
     quiz:[{
         question:{
-        Type:String,
+        type:String,
         required:true,
         },
         options:{
