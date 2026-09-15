@@ -24,6 +24,6 @@ function LectureModal({lecture,setSelectedLecture}){
             </a>
         </div>
         </div>
-    );
+    ); 
 }
 export default LectureModal;

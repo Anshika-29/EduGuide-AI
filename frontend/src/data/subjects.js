@@ -1,6 +1,14 @@
 
 const subjectsByBranch={
     CSE:[
+        "Physics I",
+        "Physica II",
+        "Mathematics I",
+        "Mathematics II",
+        "Chemistry",
+        "C Language",
+        "Engineering Drawing",
+        "Basic Electrical & Electronic Engineering",
         "Data Structures",
         "DBMS",
         "Operating System",

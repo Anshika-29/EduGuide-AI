@@ -13,26 +13,30 @@ function LectureCard({lecture,setSelectedLecture,setSelectedNotesLecture,setSele
             <p><strong>Channel:</strong> {lecture.channel}</p> 
             <p><strong>Rating:</strong>⭐{lecture.rating}</p>
             <p><strong>Views:</strong>👁️{lecture.views}</p>
+            <div className="watch-group"> 
             <a href={lecture.youTubeLink}
             target="_blank"
             rel="noopener noreferrer"
             className="watch-btn"> ▶ Watch on YouTube</a>
+            </div>
+            <div className="main-actions">
         <button
             onClick={()=>setSelectedLecture(lecture)}>
                 📖 View Details
         </button>
         {isFavorite?(
-            <button onClick={()=>removeFromFavorites(lecture._id)}>Remove from Favorites</button>
+            <button 
+            className="remove-favourite-btn"
+             onClick={()=>removeFromFavorites(lecture._id)}>Remove from Favorites</button>
         ):(
-            <>
-        <button onClick={()=>addToFavorites(lecture)}>❤️ Add to Favorites</button>
+        <button onClick={()=>addToFavorites(lecture)}>❤️ Add to Favorites</button>)}
+        </div>
+        <div className="learning-actions">
         <button onClick={()=> setSelectedNotesLecture(lecture)}>Notes</button>
         <button onClick={()=> setSelectedSummaryLecture(lecture)}>Summary</button>
         <button onClick={()=> setSelectedQuizLecture(lecture)}>Quiz</button>
-        </>
-        )
-    }
         </div>
+    </div>
     );
 }
 export default LectureCard;
