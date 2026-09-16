@@ -120,7 +120,7 @@ function App(){
       .includes(searchTopic.toLowerCase());
       const branchMatch=
       searchBranch==="" ||
-      lecture.branch=== searchBranch;
+      lecture.branches.includes(searchBranch);
       const yearMatch=
       searchYear===""||
       lecture.year===searchYear;

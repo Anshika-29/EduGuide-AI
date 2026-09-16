@@ -57,7 +57,7 @@ function SearchForm({searchTopic, setSearchTopic,searchBranch,setSearchBranch,se
                 <option value="">Learning Goal</option>
                 <option value="Detailed Learning">Detailed Learning</option>
                 <option value="Quick Revision">Quick Revision</option>
-                <option value="Gate Preparation">Gate Preparation</option>
+                <option value="GATE Preparation">GATE Preparation</option>
             </select>
             <select value={searchDifficulty}
             onChange={(e)=>setSearchDifficulty(e.target.value)}>
