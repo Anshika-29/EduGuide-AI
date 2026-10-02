@@ -3,7 +3,7 @@ function LectureCard({lecture,setSelectedLecture,setSelectedNotesLecture,setSele
         <div className="card">
             <h2 className="lecture-title">📚{lecture.topic}</h2>
             <p><strong>📚Subject:</strong>{lecture.subject}</p>
-            <p><strong>🎓Branch:</strong>{lecture.branch}</p>
+            <p><strong>🎓Branch:</strong>{lecture.branches.join(",")}</p>
             <p><strong>📅Year:</strong>{lecture.year}</p>
             <p><strong>Instructor:</strong>👨‍🏫{lecture.instructor}</p>
             <p><strong>Duration:</strong> ⏱{lecture.duration}</p>

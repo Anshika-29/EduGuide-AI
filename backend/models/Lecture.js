@@ -4,7 +4,7 @@ const lectureSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    branch:{
+    branches:{
         type:[String],
         required:true,
     },

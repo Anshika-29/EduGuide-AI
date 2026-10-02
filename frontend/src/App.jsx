@@ -36,7 +36,7 @@ function App(){
   useEffect(()=>{
     async function fetchLectures(){
       try{
-        const response=await fetch("http://localhost:5000/api/lectures");
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/api/lectures`);
         const data=await response.json();
         console.log(data);
         setLectureData(data);

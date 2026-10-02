@@ -16,14 +16,21 @@ const subjectsByBranch={
         "Machine Learning"
     ],
     IT:[
-        "Web Development",
-        "Python Programming",
-        "Cloud Computing",
-        "Cyber Security",
-        "Data Structures",
-        "DBMS",
-        "Operating System",
-        "Computer Networks"
+         "Physics",
+    "Mathematics I",
+    "Mathematics II",
+    "Chemistry",
+    "C Language",
+    "Engineering Drawing",
+    "Basic Electrical & Electronic Engineering",
+     "Web Development",
+    "Python Programming",
+    "Cloud Computing",
+    "Cyber Security",
+    "Data Structures",
+    "DBMS",
+    "Operating System",
+    "Computer Networks"
     ],
     ECE:[
         "Digital Electronics",

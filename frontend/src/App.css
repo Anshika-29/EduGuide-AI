@@ -19,42 +19,7 @@ body{
 .navbar li{
   cursor: pointer;
 }
-.hero{
-  text-align: center;
-  padding: 70px 20px;
-}
-.hero h1{
-  font-size: 45px;
-  color: #2563eb;
-}
-.hero p{
-  font-size: 20px;
-  color: #555;
-  margin-bottom: 40px;
-}
-.search-box{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  margin:35px auto;
-  padding: 20px;
-}
-input,
-select{
-  padding: 12px;
-  font-size: 16px;
-  width: 220px;
-  border-radius: 6px;
-  border: 1px solid gray;
-}
-input:focus,
-select:focus{
-  outline:none;
-  border-color:#2563eb;
-  box-shadow: 0 0 8px rgba(37,99,235,0.3);
-}
+
 button{
   padding: 12px 20px;
   background: #2563eb;
@@ -170,16 +135,6 @@ button:hover{
     text-align: center;
   }
 
-  .search-box {
-    flex-direction: column;
-  }
-
-  input,
-  select,
-  button {
-    width: 90%;
-  }
-
   .card {
     width: 100%;
     margin: 0;
@@ -196,15 +151,6 @@ button:hover{
     width: 100%;
   }
 }
-.button-group{
-  display:flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  margin-top: 12px;
-}
-
 
 .watch-group {
   display: flex;
@@ -251,17 +197,7 @@ button:hover{
 .remove-favorite-btn:hover {
   background: #b02a37;
 }
-.button-group button{
-  flex: 1;
-  min-width: 0;
-  white-space: nowrap;
-}
-.clear-btn{
-  background: #dc3545;
-}
-.clear-btn:hover{
-  background: #b02a37;
-}
+
 .active-filters{
   text-align:center;
   margin-bottom:20px;
@@ -350,4 +286,304 @@ button:hover{
   margin: 40px 0 20px;
   color: #2d5be3;
 }
+.hero {
+    width: 100%;
+    padding: 70px 20px 60px;
+    background: linear-gradient(135deg, #eff6ff, #f8fbff);
+    text-align: center;
+    box-sizing: border-box;
+}
 
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+
+    background: #dbeafe;
+    color: #2563eb;
+
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hero h1 {
+    margin: 0;
+
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.1;
+    font-weight: 800;
+    color: #172554;
+}
+
+.hero h1 span {
+    color: #2563eb;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 22px auto 0;
+
+    color: #64748b;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.hero-highlights {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.hero-highlights span {
+    padding: 10px 16px;
+
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 50px 16px 45px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero-highlights {
+        gap: 8px;
+    }
+
+    .hero-highlights span {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+}
+
+.search-section {
+    width: 92%;
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 32px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    box-sizing: border-box;
+}
+
+
+
+
+.search-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.search-header h2 {
+    margin: 0;
+    color: #172554;
+    font-size: 28px;
+    font-weight: 750;
+}
+
+.search-header p {
+    margin: 8px 0 0;
+    color: #64748b;
+    font-size: 15px;
+}
+
+
+
+.topic-search {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.topic-search input {
+    width: 100%;
+    height: 54px;
+    padding: 0 20px 0 48px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+
+    background: #f8fafc;
+    color: #0f172a;
+
+    font-size: 16px;
+    box-sizing: border-box;
+
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.topic-search input::placeholder {
+    color: #94a3b8;
+}
+
+.topic-search input:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+
+
+
+.filter-group {
+    margin-top: 24px;
+}
+
+.filter-group h3 {
+    margin: 0 0 14px;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+}
+
+
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.filter-grid select {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+
+    background: #f8fafc;
+    color: #334155;
+
+    font-size: 14px;
+
+    outline: none;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.filter-grid select:hover {
+    border-color: #94a3b8;
+}
+
+.filter-grid select:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 26px;
+}
+
+.clear-btn {
+    padding: 10px 18px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #475569;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.clear-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    color: #1e293b;
+}
+
+
+
+
+@media (max-width: 800px) {
+
+    .search-section {
+        width: 94%;
+        padding: 24px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-actions {
+        justify-content: stretch;
+    }
+
+    .clear-btn {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .search-section {
+        width: 94%;
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .search-header h2 {
+        font-size: 24px;
+    }
+
+    .search-header p {
+        font-size: 14px;
+    }
+
+    .topic-search input {
+        height: 50px;
+        font-size: 14px;
+    }
+}
