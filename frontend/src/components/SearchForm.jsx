@@ -1,5 +1,5 @@
 import subjectsByBranch from"../data/subjects";
-function SearchForm({searchTopic, setSearchTopic,searchBranch,setSearchBranch,searchYear,setSearchYear,searchSubject,setSearchSubject,searchLearningGoal,setSearchLearningGoal,searchDifficulty,setSearchDifficulty,searchLanguage,setSearchLanguage}){
+function SearchForm({searchTopic, setSearchTopic,searchBranch,setSearchBranch,searchYear,setSearchYear,searchSubject,setSearchSubject,searchLearningGoal,setSearchLearningGoal,searchDifficulty,setSearchDifficulty,searchLanguage,setSearchLanguage,onSearch}){
     const availableSubjects=subjectsByBranch[searchBranch]||[];
     const clearFilters =() =>{
         setSearchTopic("");
@@ -144,6 +144,13 @@ function SearchForm({searchTopic, setSearchTopic,searchBranch,setSearchBranch,se
                 >
                     ↻ Clear Filters
                 </button>
+               <button
+        className="find-lectures-btn"
+        onClick={onSearch}
+    >
+        🔍 Find Lectures
+    </button>
+
 
             </div>
 

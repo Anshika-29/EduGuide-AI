@@ -21,6 +21,7 @@ function App(){
   const [selectedSummaryLecture,setSelectedSummaryLecture]=useState(null);
   const[selectedNotesLecture,setSelectedNotesLecture]=useState(null);
   const[favoriteLectures,setFavoriteLectures]=useState([]);
+  const [showResults, setShowResults] = useState(false);
   const firstFavoriteRender=useRef(true);
   const firstFilterRender=useRef(true);
   const filters={
@@ -147,16 +148,32 @@ function App(){
   ? 0
   :totalRating/filteredLectures.length;
   const formattedAverage=averageRating.toFixed(1);
-  const totalViews=filteredLectures.reduce((sum,lecture)=>{
-    let views=0;
-    if(lecture.views.endsWith("M")){
-      views=parseFloat(lecture.views)*1000000;
-    }else if(lecture.views.endsWith("K")){
-      views=parseFloat(lecture.views)*1000;
+const totalViews = filteredLectures.reduce((sum, lecture) => {
+    const viewsText = String(lecture.views).trim().toUpperCase();
+
+    let views = 0;
+
+    if (viewsText.endsWith("B")) {
+        views = parseFloat(viewsText) * 1000000000;
+    } else if (viewsText.endsWith("M")) {
+        views = parseFloat(viewsText) * 1000000;
+    } else if (viewsText.endsWith("K")) {
+        views = parseFloat(viewsText) * 1000;
+    } else {
+        views = parseFloat(viewsText) || 0;
     }
-    return sum+views;
-  },0);
-  const formattedViews=(totalViews/1000000).toFixed(1)+"M";
+
+    return sum + views;
+}, 0);
+
+const formattedViews =
+    totalViews >= 1000000000
+        ? (totalViews / 1000000000).toFixed(1) + "B"
+        : totalViews >= 1000000
+        ? (totalViews / 1000000).toFixed(1) + "M"
+        : totalViews >= 1000
+        ? (totalViews / 1000).toFixed(1) + "K"
+        : totalViews.toLocaleString();
   return(
     <div>
       <Navbar />
@@ -176,31 +193,43 @@ function App(){
       setSearchDifficulty={setSearchDifficulty}
       searchLanguage={searchLanguage}
       setSearchLanguage={setSearchLanguage}
+      onSearch={() => setShowResults(true)}
       />
+      {showResults &&(
+        <>
       <div className="results">
         <h3>
           Showing {filteredLectures.length} Lecture
           {filteredLectures.length !==1 ? "s":""}
         </h3>
       </div>
-      <div className="stats-dashboard">
-        <div className="stat-card">
-          <h3>Total Lectures</h3>
-          <p>{filteredLectures.length}</p>
-        </div>
-        <div className="stat-card">
-          <h3>Average Rating</h3>
-          <p>{formattedAverage}</p>
-        </div>
-        <div className="stat-card">
-          <h3>Total Views</h3>
-          <p>{formattedViews}</p>
-        </div>
-        <div className="stat-card">
-          <h3>Favorite Lectures</h3>
-          <p>{favoriteLectures.length}</p>
-        </div>
-      </div>
+     <div className="stats-dashboard">
+
+    <div className="stat-card">
+        <div className="stat-icon">📚</div>
+        <h3>Total Lectures</h3>
+        <p>{filteredLectures.length}</p>
+    </div>
+
+    <div className="stat-card">
+        <div className="stat-icon">⭐</div>
+        <h3>Average Rating</h3>
+        <p>{formattedAverage}</p>
+    </div>
+
+    <div className="stat-card">
+        <div className="stat-icon">👁️</div>
+        <h3>Total Views</h3>
+        <p>{formattedViews}</p>
+    </div>
+
+    <div className="stat-card">
+        <div className="stat-icon">❤️</div>
+        <h3>Favorite Lectures</h3>
+        <p>{favoriteLectures.length}</p>
+    </div>
+
+</div>
       <div className="active-filters">
         {
           !searchTopic &&
@@ -228,6 +257,7 @@ function App(){
       
       {
         filteredLectures.length> 0 ?(
+          <>
           <div className="lecture-container">
       {filteredLectures.map((lecture,index) => 
       (<LectureCard
@@ -240,6 +270,7 @@ function App(){
         addToFavorites={addToFavorites}
         />
       ))}
+      </div>
       {
         favoriteLectures.length===0?(
           <div className="empty-favorites">
@@ -250,6 +281,7 @@ function App(){
           <><h2 className="favorite-heading">
             Favorite Lectures({favoriteLectures.length})
           </h2>
+          <div className="lecture-container">
       {
         favoriteLectures.map((lecture)=>(
          <LectureCard
@@ -264,6 +296,7 @@ function App(){
          />
         ))
       }
+      </div>
       </>
         )
       }
@@ -286,7 +319,7 @@ function App(){
           />
         )
       }
-            </div>
+            </>
       ):(
         <div className="no-results">
           <h2>😔 No lectures found</h2>
@@ -299,7 +332,9 @@ function App(){
     </div>
   )
 }
+</>)}
 </div>
   );
 }
+ 
 export default App;
