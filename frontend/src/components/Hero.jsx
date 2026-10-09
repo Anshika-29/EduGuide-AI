@@ -1,3 +1,4 @@
+import {Link } from "react-router-dom";
 function Hero() {
     return (
         <section className="hero">
@@ -19,11 +20,23 @@ function Hero() {
                 </p>
 
                 <div className="hero-highlights">
-                    <span>🔍 Smart Lecture Search</span>
-                    <span>✨ AI Summaries</span>
-                    <span>🧠 AI Quizzes</span>
-                    <span>💬 Doubt Solving</span>
+                   <Link to="/lectures/search" className="hero-feature">
+        🔍 Smart Lecture Search
+    </Link>
+
+    <Link to="/lectures/search" className="hero-feature">
+        ✨ AI Summaries
+    </Link>
+
+    <Link to="/lectures/search" className="hero-feature">
+        🧠 AI Quizzes
+    </Link>
+
+    <Link to="/lectures/search" className="hero-feature">
+        💬 Doubt Solving
+    </Link>
                 </div>
+                <div className="hero-actions"> <Link to="/lectures/search" className="hero-cta"> Start Finding Lectures → </Link> </div>
 
             </div>
         </section>

@@ -1,3 +1,7 @@
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import Home from "./pages/Home";
+import LectureSearch from "./pages/LectureSearch";
+import LectureResults from"./pages/LectureResults";
 import QuizModal from "./components/QuizModal";
 import SummaryModal from "./components/SummaryModal";
 import NotesModal from "./components/NotesModal";
@@ -174,167 +178,75 @@ const formattedViews =
         : totalViews >= 1000
         ? (totalViews / 1000).toFixed(1) + "K"
         : totalViews.toLocaleString();
-  return(
-    <div>
-      <Navbar />
-      <Hero />
-      <SearchForm 
-      searchTopic={searchTopic}
-      setSearchTopic={setSearchTopic}
-      searchBranch={searchBranch}
-      setSearchBranch={setSearchBranch}
-      searchYear={searchYear}
-      setSearchYear={setSearchYear}
-      searchSubject={searchSubject}
-      setSearchSubject={setSearchSubject}
-      searchLearningGoal={searchLearningGoal}
-      setSearchLearningGoal={setSearchLearningGoal}
-      searchDifficulty={searchDifficulty}
-      setSearchDifficulty={setSearchDifficulty}
-      searchLanguage={searchLanguage}
-      setSearchLanguage={setSearchLanguage}
-      onSearch={() => setShowResults(true)}
-      />
-      {showResults &&(
-        <>
-      <div className="results">
-        <h3>
-          Showing {filteredLectures.length} Lecture
-          {filteredLectures.length !==1 ? "s":""}
-        </h3>
-      </div>
-     <div className="stats-dashboard">
-
-    <div className="stat-card">
-        <div className="stat-icon">📚</div>
-        <h3>Total Lectures</h3>
-        <p>{filteredLectures.length}</p>
-    </div>
-
-    <div className="stat-card">
-        <div className="stat-icon">⭐</div>
-        <h3>Average Rating</h3>
-        <p>{formattedAverage}</p>
-    </div>
-
-    <div className="stat-card">
-        <div className="stat-icon">👁️</div>
-        <h3>Total Views</h3>
-        <p>{formattedViews}</p>
-    </div>
-
-    <div className="stat-card">
-        <div className="stat-icon">❤️</div>
-        <h3>Favorite Lectures</h3>
-        <p>{favoriteLectures.length}</p>
-    </div>
-
-</div>
-      <div className="active-filters">
-        {
-          !searchTopic &&
-          !searchBranch &&
-          !searchYear &&
-          !searchSubject &&
-          !searchLearningGoal&&
-          !searchDifficulty &&
-          !searchLanguage&&(<p className="no-filter">
-            No filters applied .Showing all lectures.
-          </p>)
-        }
-      {searchTopic &&(
-          <p><strong>Topic:</strong> {searchTopic}</p>)}
-          {searchBranch&&(<p><strong>Branch:</strong> {searchBranch}</p>)}
-          {searchYear &&(<p><strong>Year:</strong> {searchYear}</p>)}
-          {searchSubject &&(
-            <p><strong>Subject:</strong> {searchSubject}</p>
-          )}
-          {searchDifficulty &&(<p><strong>Difficulty:</strong> {searchDifficulty}</p>)}
-          {searchLearningGoal&&(<p><strong>Learning Goal:</strong> {searchLearningGoal}</p>)}
-          {searchLanguage &&(<p><strong>Language:</strong> {searchLanguage}</p>)}
-          
-          </div>
-      
-      {
-        filteredLectures.length> 0 ?(
-          <>
-          <div className="lecture-container">
-      {filteredLectures.map((lecture,index) => 
-      (<LectureCard
-      key={lecture._id}
-       lecture={lecture}
-        setSelectedLecture={setSelectedLecture}
-        setSelectedNotesLecture={setSelectedNotesLecture}
-        setSelectedSummaryLecture={setSelectedSummaryLecture}
-        setSelectedQuizLecture={setSelectedQuizLecture}
-        addToFavorites={addToFavorites}
-        />
-      ))}
-      </div>
-      {
-        favoriteLectures.length===0?(
-          <div className="empty-favorites">
-            <h2> No Favorite Lectures Yet</h2>
-            <p>Start adding lectures to build your personal learning list.</p>
-            </div>
-        ):(
-          <><h2 className="favorite-heading">
-            Favorite Lectures({favoriteLectures.length})
-          </h2>
-          <div className="lecture-container">
-      {
-        favoriteLectures.map((lecture)=>(
-         <LectureCard
-         key={lecture._id}
-         lecture={lecture}
-         setSelectedLecture={setSelectedLecture}
-         setSelectedNotesLecture={setSelectedNotesLecture}
-         setSelectedSummaryLecture={setSelectedSummaryLecture}
-         setSelectedQuizLecture={setSelectedQuizLecture}
-         isFavorite={true}
-         removeFromFavorites={removeFromFavorites}
-         />
-        ))
-      }
-      </div>
-      </>
-        )
-      }
-      {selectedLecture &&(<LectureModal lecture={selectedLecture}
-      setSelectedLecture={setSelectedLecture}/>)}
-      {selectedNotesLecture &&(
-        <NotesModal lecture={selectedNotesLecture}
-        setSelectedLecture={setSelectedNotesLecture}/>
-      )}
-      {
-        selectedSummaryLecture &&(
-          <SummaryModal lecture={selectedSummaryLecture}
-          setSelectedSummaryLecture={setSelectedSummaryLecture}/>
-        )
-      }
-      {
-        selectedQuizLecture && (
-          <QuizModal lecture={selectedQuizLecture}
-          setSelectedQuizLecture={setSelectedQuizLecture}
-          />
-        )
-      }
-            </>
-      ):(
-        <div className="no-results">
-          <h2>😔 No lectures found</h2>
-          <p>We couldn't find any lecture matching your current search.</p>
-          <ul>
-            <li>🔍 Try searching another topic</li>
-            <li>🎯Remove one or more filters</li>
-            <li>🔄Click "Clear Filters" to reset everything</li>
-          </ul>
-    </div>
-  )
-}
-</>)}
-</div>
-  );
-}
  
+return ( <BrowserRouter basename="EduGuide-AI"> <Routes>
+<Route
+path="/"
+element={<Home />}
+/>
+
+
+    <Route
+      path="/lectures/search"
+      element={
+        <LectureSearch
+          searchTopic={searchTopic}
+          setSearchTopic={setSearchTopic}
+          searchBranch={searchBranch}
+          setSearchBranch={setSearchBranch}
+          searchYear={searchYear}
+          setSearchYear={setSearchYear}
+          searchSubject={searchSubject}
+          setSearchSubject={setSearchSubject}
+          searchLearningGoal={searchLearningGoal}
+          setSearchLearningGoal={setSearchLearningGoal}
+          searchDifficulty={searchDifficulty}
+          setSearchDifficulty={setSearchDifficulty}
+          searchLanguage={searchLanguage}
+          setSearchLanguage={setSearchLanguage}
+          onSearch={() => setShowResults(true)}
+        />
+      }
+    />
+
+    <Route
+      path="/lectures"
+      element={
+        <LectureResults
+          lectureData={lectureData}
+          filteredLectures={filteredLectures}
+          favoriteLectures={favoriteLectures}
+          addToFavorites={addToFavorites}
+          removeFromFavorites={removeFromFavorites}
+          totalRating={totalRating}
+          averageRating={averageRating}
+          formattedAverage={formattedAverage}
+          formattedViews={formattedViews}
+          searchTopic={searchTopic}
+          searchBranch={searchBranch}
+          searchYear={searchYear}
+          searchSubject={searchSubject}
+          searchLearningGoal={searchLearningGoal}
+          searchDifficulty={searchDifficulty}
+          searchLanguage={searchLanguage}
+          clearFilters={clearFilters}
+          setSelectedLecture={setSelectedLecture}
+          setSelectedNotesLecture={setSelectedNotesLecture}
+          setSelectedSummaryLecture={setSelectedSummaryLecture}
+          setSelectedQuizLecture={setSelectedQuizLecture}
+          selectedLecture={selectedLecture}
+          selectedNotesLecture={selectedNotesLecture}
+          selectedSummaryLecture={selectedSummaryLecture}
+          selectedQuizLecture={selectedQuizLecture}
+        />
+      }
+    />
+  </Routes>
+</BrowserRouter>
+
+
+);
+
+}
+
 export default App;
